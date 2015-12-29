@@ -2,19 +2,9 @@
 //  ViewController.swift
 //  Calculator
 //
-//  Created by Nico Garstman on 24-11-15.
+//  Created by Tim Garstman on 24-11-15.
 //  Copyright © 2015 Tim Garstman. All rights reserved.
 //
-
-// Een type kan twee values hebben:
-// optie 1: Not set = nil
-// optie 2: Something = String
-// String? = Optional string
-// String! = een string unwrappen, LET OP, als de string nil is dan crasht het programma
-
-
-//All properties in swift has to be initialized
-
 
 import UIKit
 
@@ -105,8 +95,7 @@ class ViewController: UIViewController {
             userIsInTheMiddleOfTypingANumber = false
         }
     }
-    
-    //vanaf assignment 2 opdracht 7 wist ik niet hoe ik dit moest aanpakken.
+   
 
 
 }

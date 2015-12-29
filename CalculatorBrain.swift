@@ -12,6 +12,7 @@ class CalculatorBrain
 {
     private enum Op: CustomStringConvertible //printable
     {
+        case Constant(String, Double)
         case Operand(Double)
         case UnaryOperation(String, Double -> Double)
         case BinaryOperation(String, (Double, Double) -> Double)
@@ -19,6 +20,8 @@ class CalculatorBrain
         var description: String {
             get{
                 switch self {
+                case .Constant(let symbol, _):
+                    return symbol
                 case .Operand(let operand):
                     return "\(operand)"
                 case .UnaryOperation(let symbol, _):
@@ -46,8 +49,9 @@ class CalculatorBrain
         knownOps["√"] = Op.UnaryOperation("√", sqrt)
         knownOps["sin"] = Op.UnaryOperation("sin", sin)
         knownOps["cos"] = Op.UnaryOperation("cos", cos)
-        //knownOps["π"] = Op.BinaryOperation("π", M_PI)
+        knownOps["π"] = Op.Constant("π", M_PI)
         //BinaryOperation en UnaryOperation geven bij pi beiden een foutmelding
+        //daarom opgezocht op internet, via github een oplossing hiervoor gevonden
     }
     
     private func evaluate(ops: [Op]) -> (result: Double?, remainingOps: [Op])
@@ -56,6 +60,8 @@ class CalculatorBrain
             var remainingOps = ops
             let op = remainingOps.removeLast()
             switch op{
+            case .Constant(_, let operand):
+                return (operand, remainingOps)
             case .Operand(let operand):
                 return (operand, remainingOps)
             case .UnaryOperation(_, let operation):
@@ -78,14 +84,10 @@ class CalculatorBrain
     
     //hier var variableValues toevoegen
     func evaluate() -> Double? {
-        if var variableValues != nil{
-            let (result, remainder) = evaluate(opStack)
-            print("\(opStack) = \(result) with \(remainder) left over")
-            return result
-        } else {
-            return nil
-        }
-    }
+        let (result, remainder) = evaluate(opStack)
+        print("\(opStack) = \(result) with \(remainder) left over")
+        return result
+    } //Hier heb ik de if en else uit de lectures weggehaald
     
     
     func pushOperand(operand: Double) -> Double? {
@@ -107,8 +109,8 @@ class CalculatorBrain
     }
     
     //API, niet helemaal duidelijk wat ik bij deze opdracht (5) moest doen.
-    func pushOperand(symbol: String) -> Double?
-    var variableValues: Dictionary<String, Double>
+    //func pushOperand(symbol: String) -> Double?
+    //var variableValues: Dictionary<String, Double>
     
     
     

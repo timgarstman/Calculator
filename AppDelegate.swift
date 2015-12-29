@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Calculator
 //
-//  Created by Nico Garstman on 24-11-15.
+//  Created by Tim Garstman on 24-11-15.
 //  Copyright © 2015 Tim Garstman. All rights reserved.
 //
 
